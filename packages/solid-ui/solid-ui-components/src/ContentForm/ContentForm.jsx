@@ -47,6 +47,11 @@ const ContentForm = ({ id, form: { action, fields, buttons } = {} }) => {
   const { handleSubmit, submitting, success } = useForm()
   const { formValues, setFormValues } = useContext(FormContext)
   const formId = id
+  const [formData, setFormData] = useState({
+    name: "Muhammad Fahid",
+    email: "muhammadfahid47@gmail.com",
+    message: "ffff"
+  });
 
   useEffect(() => {
     return () =>
@@ -78,25 +83,18 @@ const ContentForm = ({ id, form: { action, fields, buttons } = {} }) => {
     handleSubmit(e, { action })
   }
 
- const handleSubmits = (e) => {
-  e.preventDefault();
+  const handleSubmits = (e) => {
+    e.preventDefault();
 
- const obj =  {
-    isValidated: false,
-    name: "Muhammad Fahid",
-    email: "muhammadfahid47@gmail.com",
-    message: "ffff"
-}
-    const form = e.target;
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({
-        "form-name": form.getAttribute("name"),
-        obj,
+        "form-name": e.target.getAttribute("name"),
+        ...formData
       }),
     })
-      .then(() => navigate(form.getAttribute("action")))
+      .then(() => navigate(e.target.getAttribute("action")))
       .catch((error) => alert(error));
   };
 
