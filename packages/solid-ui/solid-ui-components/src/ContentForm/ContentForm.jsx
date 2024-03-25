@@ -82,10 +82,10 @@ const ContentForm = ({ id, form: { action, fields, buttons } = {} }) => {
   e.preventDefault();
 
  const obj =  {
-    "isValidated": false,
-    "name": "Muhammad Fahid",
-    "email": "muhammadfahid47@gmail.com",
-    "message": "ffff"
+    isValidated: false,
+    name: "Muhammad Fahid",
+    email: "muhammadfahid47@gmail.com",
+    message: "ffff"
 }
     const form = e.target;
     fetch("/", {
