@@ -48,9 +48,10 @@ const ContentForm = ({ id, form: { action, fields, buttons } = {} }) => {
   const { formValues, setFormValues } = useContext(FormContext)
   const formId = id
   const [formData, setFormData] = useState({
-    name: "Muhammad Fahid",
-    email: "muhammadfahid47@gmail.com",
-    message: "ffff"
+    name: "",
+    email: "",
+    subject:"",
+    message: ""
   });
 
   useEffect(() => {
@@ -65,6 +66,7 @@ const ContentForm = ({ id, form: { action, fields, buttons } = {} }) => {
   }, [success, submitting, setFormValues])
 
   const onChange = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
     setFormValues({
       ...formValues,
       [formId]: {
@@ -85,7 +87,6 @@ const ContentForm = ({ id, form: { action, fields, buttons } = {} }) => {
 
   const handleSubmits = (e) => {
     e.preventDefault();
-
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
